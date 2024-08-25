@@ -3,11 +3,13 @@ import { Author } from '../interfaces/author';
 import { Router } from '@angular/router';
 import { AuthorService } from '../services/author.service';
 import { NgFor } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-authors',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor,ReactiveFormsModule],
   templateUrl: './authors.component.html',
   styleUrl: './authors.component.css'
 })
@@ -17,8 +19,14 @@ export class AuthorsComponent {
   currentPage: number = 1;
   pageSize: number = 3;
   authors: Author[] = [];
-
-  constructor(private router: Router, private authorService:AuthorService) {}
+  authorForm:FormGroup;
+  showAddForm: boolean = false;
+  constructor(private fb: FormBuilder,private router: Router, private authorService:AuthorService,private toastr: ToastrService) {
+    this.authorForm = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(3)]],
+      email: ['', [Validators.required]],
+      bio: ['', [Validators.required]]    })
+  }
   ngOnInit(){
     this.loadAuthors();
   }
@@ -45,4 +53,24 @@ export class AuthorsComponent {
   viewAuthorDetails(authorId: any): void {
     this.router.navigate(['/author-details', authorId]);
   }
+
+  addAuthor(): void {
+    if (this.authorForm.valid) {
+      const { name, email, bio } = this.authorForm.value;
+      this.authorService.addAuthor(name, email, bio).subscribe(
+        (res) => {
+          console.log(res);
+          this.loadAuthors(); 
+          this.authorForm.reset(); 
+          this.showAddForm = false;
+          this.toastr.success('Author Addedd successfully.');
+
+        },
+        (error) => {
+          console.error('Error adding author', error);
+        }
+      );
+    }
+  }
+
 }

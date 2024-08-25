@@ -18,4 +18,9 @@ export class AuthorService {
   }
   authorDetails(id: any): Observable<Author[]> {
     return this._HttpClient.get<Author[]>(`${this.apiUrl}/${id}`);
-  }}
+  }
+  addAuthor(name: string, email: string, bio: string): Observable<any> {
+    const author = { name, email, bio };
+    return this._HttpClient.post(`${this.apiUrl}`, author);
+  }
+}

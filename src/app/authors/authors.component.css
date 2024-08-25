@@ -145,4 +145,44 @@
       .page-item .page-link span {
         font-size: 1.25rem; 
       }
+      .containerAdd{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        margin-left: 900px;
+        background: linear-gradient(to right, rgb(29, 15, 6), rgb(88, 37, 17));
+        border: 1px solid #dee2e6; 
+        border-radius: 0.25rem; 
+    }
+      label{
+        margin-right: 20px;
+
+      }
+      #butn{
+        color: #ffffff;
+        background-color: rgb(97,87,54);
+        width: 30px;
+        height: 30px;
+
+      }
+      .popup-form {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000; 
+      }
+      
+      .popup-content {
+        background-color: #333; 
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+      }
       
