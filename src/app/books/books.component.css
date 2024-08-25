@@ -91,7 +91,7 @@
         width: 420px; 
         height: 60px; 
         padding: 0 20px 0 40px; 
-        border: 5px solid #e79600;
+        border: 5px solid #6e3b00;
         border-radius: 10px; 
         background-color: #fff; 
         font-size: 20px; 
@@ -99,10 +99,6 @@
         transition: all 0.3s ease; 
     }
     
-    #search input:focus {
-        border-color: #6e3b00; 
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    }
     .containerP {
         display: flex;
         justify-content: center;

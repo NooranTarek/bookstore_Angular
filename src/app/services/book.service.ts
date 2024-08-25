@@ -16,5 +16,9 @@ export class BookService {
       .set('limit', limit.toString());
     return this._HttpClient.get<Book[]>(this.apiUrl, { params });
   }
+  searchBooks(title: string): Observable<Book[]> {
+    return this._HttpClient.get<Book[]>(`${this.apiUrl}/search?title=${title}`);
+  }
+  
 
 }
