@@ -1,0 +1,18 @@
+    /* .bg-blur {
+        filter: blur(2px); 
+    } */
+    .text-outline {
+        text-shadow: 
+            -1px -1px 0 #ffc107,  
+             1px -1px 0 #ffc107,
+            -1px  1px 0 #ffc107,
+             1px  1px 0 #ffc107;
+    }
+h2{
+    font-size: 40px;
+
+}
+h1{
+    font-size: 80px;
+    font-weight:bolder;
+}
