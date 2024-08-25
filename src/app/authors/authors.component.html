@@ -1,0 +1,43 @@
+<div class="container  justify-content-center mt-50 mb-50">
+    <div class="row">
+        @for (author of this.authors;track author._id){
+        <div class="col-md-4 mt-2">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+                  <div class="mt-auto text-center">
+                    <div class="mb-2">
+                      <h2 class="font-weight-semibold mb-2">
+                        {{ author.name }}
+                      </h2>
+                      <h6 class="font-weight-semibold mb-2">
+                        {{ author.bio }}
+                      </h6>
+                    </div>
+                    <button (click)="viewAuthorDetails(author._id)" type="button" class="btn btn-warning">Show Details</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        }
+    </div>
+</div> 
+
+<div class="containerP text-center">
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="i + 1 === currentPage">
+        <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

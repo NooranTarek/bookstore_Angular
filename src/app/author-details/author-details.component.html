@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="book-card">
+        @if(author) {
+            <div class="badge"><h1>{{author.name}}</h1></div>
+            <div class="book-details">
+                <span class="book-author">{{ author.email }}</span>
+                <p>{{ author.bio }}</p>
+            </div>
+        }
+    </div>
+</div>
