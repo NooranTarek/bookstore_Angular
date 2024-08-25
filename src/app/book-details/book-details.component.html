@@ -1,1 +1,14 @@
-<p>book-details works!</p>
+<div class="container">
+    <div class="book-card">
+        @if(book) {
+            <div class="badge"><h1>{{book.title}}</h1></div>
+            <div class="img">
+                <img [src]="book.image" alt="{{ book.title }}">
+            </div>
+            <div class="book-details">
+                <span class="book-author">{{ book.author.name }}</span>
+                <p>{{ book.description }}</p>
+            </div>
+        }
+    </div>
+</div>

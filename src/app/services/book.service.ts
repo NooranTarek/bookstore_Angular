@@ -29,5 +29,7 @@ export class BookService {
   filterBooks(authorId: any): Observable<Book[]> {
     return this._HttpClient.get<Book[]>(`${this.apiUrl}/author/${authorId}`);
   }
-
+  bookDetails(id: any): Observable<Book[]> {
+    return this._HttpClient.get<Book[]>(`${this.apiUrl}/${id}`);
+  }
 }

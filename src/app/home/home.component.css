@@ -3,10 +3,10 @@
     } */
     .text-outline {
         text-shadow: 
-            -1px -1px 0 #ffc107,  
-             1px -1px 0 #ffc107,
-            -1px  1px 0 #ffc107,
-             1px  1px 0 #ffc107;
+            -1px -1px 0 #533f00,  
+             1px -1px 0 #533f00,
+            -1px  1px 0 #533f00,
+             1px  1px 0 #533f00;
     }
 h2{
     font-size: 40px;
@@ -15,4 +15,7 @@ h2{
 h1{
     font-size: 80px;
     font-weight:bolder;
+}
+.btn{
+    margin-right: 20px;
 }

@@ -13,4 +13,11 @@ export class HomeComponent {
   constructor(
     private router: Router
   ) {}
+  scrollToBooks(): void {
+    const booksSection = document.getElementById('books');
+    if (booksSection) {
+      booksSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  
 }

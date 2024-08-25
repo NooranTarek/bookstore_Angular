@@ -92,5 +92,7 @@ export class BooksComponent {
 
     }
   }
-  
+  viewBookDetails(bookId: any): void {
+    this.router.navigate(['/book-details', bookId]);
+  }
 }

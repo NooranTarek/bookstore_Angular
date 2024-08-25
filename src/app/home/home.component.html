@@ -7,11 +7,13 @@
             <div class="position-absolute top-50 start-50 translate-middle text-center text-light">
                 <h2 class="mb-3 text-outline">Welcome To</h2>
                 <h1 class="display-3 font-weight-bold mb-4 text-outline">The Book Cove</h1>
-                <button class="btn btn-warning btn-lg" [routerLink]="['/products']">Show Books</button>
+                <button class="btn btn-warning btn-sm" (click)="scrollToBooks()">Show Books</button>
+                <button class="btn btn-warning btn-sm" [routerLink]="['/authors']">Show Authors</button>
+
             </div>
         </div>
     </div>
-    <app-books></app-books>
+    <app-books id="books"></app-books>
 </div>
 
            <!-- <img src="https://img.freepik.com/premium-photo/books-library_926199-2670856.jpg?w=826" -->
