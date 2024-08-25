@@ -9,7 +9,7 @@ export const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: '/books',
+        path: 'books',
         component: BooksComponent,
       },
       {

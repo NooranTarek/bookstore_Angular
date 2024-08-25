@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+body,:root {
+    background: linear-gradient(to right, rgb(41,22,13), rgb(90,51,21)) !important;
+    /* background-size: cover; 
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: white;*/
+    overflow-x:hidden !important ; 
+  }
