@@ -113,7 +113,20 @@
     
 }
 .booksContainer{
-    margin-top: -280px;
-    margin-left:220px;
+    margin-top: -260px;
+    margin-left:-140px;
     padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.buttons2{
+    margin-top: -300px;
+    /* margin-bottom: 100px; */
+    margin-left: 720px;
+    position: absolute;
+    background: linear-gradient(to right, rgb(29, 15, 6), rgb(88, 37, 17));
+    border: 1px solid #dee2e6; 
+    border-radius: 0.25rem; 
 }

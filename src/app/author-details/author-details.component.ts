@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { BookService } from '../services/book.service';
 @Component({
   selector: 'app-author-details',
   standalone: true,
@@ -16,20 +17,29 @@ import Swal from 'sweetalert2';
 export class AuthorDetailsComponent {
   author:Author|undefined;
   authorForm:FormGroup;
+  bookForm:FormGroup;
   showEditForm: boolean = false;
   @Input() authorData  !: Author;
   booksOfAuthor:any;
+  showAddForm: boolean = false;
+
   constructor(
     private toastr: ToastrService,
     private fb: FormBuilder,
     private router: Router,
     private authorService: AuthorService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private bookService:BookService
   ) {
     this.authorForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       bio: ['']
+    });
+    this.bookForm = this.fb.group({
+      title: ['', Validators.required],
+      image: ['', [Validators.required]],
+      description: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(3)]]
     });
   }
   ngOnInit():void{
@@ -114,5 +124,28 @@ authorBooks ():void{
 }
 viewBookDetails(bookId: any): void {
   this.router.navigate(['/book-details', bookId]);
+}
+
+//______________________book____________________
+addBook(): void {
+  if (this.bookForm.valid && this.author) {
+    const { title, description, image } = this.bookForm.value;
+    const authorId = this.author._id; 
+    this.bookService.addBook(title, description, image, authorId).subscribe(
+      (res) => {
+        console.log(res);
+        console.log('Image URL:', image);
+        this.authorBooks();
+        this.bookForm.reset(); 
+        this.showAddForm = false;
+        this.toastr.success('Book added successfully.');
+
+      },
+      (error: HttpErrorResponse) => {
+        console.log("error----->", error.error.message);
+        this.toastr.error(error.error.message);
+      }
+    );
+  }
 }
 }

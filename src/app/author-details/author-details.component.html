@@ -72,12 +72,70 @@
           </div>
 }
   </div>
+<!-- //ADD NEW BOOK -->
+  @if(showAddForm){
+    <div class="popup-form">
+        <div class="popup-content">
+          <form [formGroup]="bookForm" (ngSubmit)="addBook()">
+            <div class="form-group">
+              <label for="title" class="text-light">Title:</label>
+              <input id="title" class="form-control" formControlName="title" type="text">
+              @if(bookForm.controls['title'].invalid && bookForm.controls['title'].touched) {
+                <div id="categoryHelp" class="form-text text-danger">
+                  @if(bookForm.controls['title'].errors?.['required']) {
+                    <small>title is required</small>
+                  }
+                </div>
+              }
+            </div>
+            <div class="form-group">
+              <label for="image" class="text-light">Image:</label>
+              <input id="image" class="form-control" formControlName="image" type="text">
+              @if(bookForm.controls['image'].invalid && bookForm.controls['image'].touched) {
+                <div id="categoryHelp" class="form-text text-danger">
+                  @if(bookForm.controls['image'].errors?.['required']) {
+                    <small>image is required</small>
+                  }
+                </div>
+              }
+            </div>
+            <div class="form-group">
+              <label for="description" class="text-light">Description:</label>
+              <textarea id="description" class="form-control" formControlName="description"></textarea>
+              @if(bookForm.controls['description'].invalid && bookForm.controls['description'].touched) {
+                <div id="categoryHelp" class="form-text text-danger">
+                  @if(bookForm.controls['description'].errors?.['required']) {
+                    <small>description is required</small>
+                  }
+                  @if(bookForm.controls['description'].errors?.['minLength']) {
+                    <small>Title must be from 3 to 30 characters</small>
+                  }
+                  @if(bookForm.controls['description'].errors?.['maxLength']) {
+                    <small>Title must be from 3 to 30 characters</small>
+                  }
+                </div>
+              }
+            </div>
+            <button type="submit" class="btn btn-success mt-3">Add Author</button>
+            <button type="button" class="btn btn-danger mt-3" (click)="showAddForm = false">Cancel</button>
+          </form>
+        </div>
+      </div>
+}
 
+
+<div class="buttons2">
+        <label for="sortSelect" class="form-label text-light">Add new book</label>
+    <button (click)="showAddForm = !showAddForm" id="butn" class=" btn-primary btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Add"><i class="fa fa-table"></i></button>
+  </div>
   <div class="booksContainer justify-content-center mt-50 mb-50">
     <div class="row">
         @for (authorBook of this.booksOfAuthor;track authorBook._id){
+            
         <div class="col-md-4 mt-2">
+            
             <div class="card h-100">
+                
                 <div class="card-body d-flex flex-column">
                   <!-- Displaying book details -->
 
@@ -96,13 +154,17 @@
                       <h2 class="font-weight-semibold mb-2">
                         {{ authorBook.title }}
                       </h2>
-                      <h6 class="font-weight-semibold mb-2">
-                        {{ authorBook.description }}
-                      </h6>
                     </div>
                     <button (click)="viewBookDetails(authorBook._id)" type="button" class="btn btn-warning">Show Details</button>
                   </div>
                 </div>
+                <button class="btn btn-primary btn-sm rounded-0" type="button" (click)="showEditForm = true" title="Edit">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  
+                  <button class="btn btn-danger btn-sm rounded-0" type="button" (click)="deleteAuthor()" title="Delete">
+                    <i class="fa fa-trash"></i>
+                  </button>
               </div>
             </div>
         }
