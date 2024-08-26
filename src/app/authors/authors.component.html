@@ -11,14 +11,41 @@
                 <div class="form-group">
                   <label for="name" class="text-light">Name:</label>
                   <input id="name" class="form-control" formControlName="name" type="text">
+                  @if(authorForm.controls['name'].invalid && authorForm.controls['name'].touched) {
+                    <div id="categoryHelp" class="form-text text-danger">
+                      @if(authorForm.controls['name'].errors?.['required']) {
+                        <small>name is required</small>
+                      }
+                    </div>
+                  }
                 </div>
                 <div class="form-group">
                   <label for="email" class="text-light">Email:</label>
                   <input id="email" class="form-control" formControlName="email" type="email">
+                  @if(authorForm.controls['email'].invalid && authorForm.controls['email'].touched) {
+                    <div id="categoryHelp" class="form-text text-danger">
+                      @if(authorForm.controls['email'].errors?.['required']) {
+                        <small>email is required</small>
+                      }
+                    </div>
+                  }
                 </div>
                 <div class="form-group">
                   <label for="bio" class="text-light">Bio:</label>
                   <textarea id="bio" class="form-control" formControlName="bio"></textarea>
+                  @if(authorForm.controls['bio'].invalid && authorForm.controls['bio'].touched) {
+                    <div id="categoryHelp" class="form-text text-danger">
+                      @if(authorForm.controls['bio'].errors?.['required']) {
+                        <small>bio is required</small>
+                      }
+                      @if(authorForm.controls['bio'].errors?.['minLength']) {
+                        <small>Title must be from 3 to 30 characters</small>
+                      }
+                      @if(authorForm.controls['bio'].errors?.['maxLength']) {
+                        <small>Title must be from 3 to 30 characters</small>
+                      }
+                    </div>
+                  }
                 </div>
                 <button type="submit" class="btn btn-success mt-3">Add Author</button>
                 <button type="button" class="btn btn-danger mt-3" (click)="showAddForm = false">Cancel</button>
@@ -51,7 +78,6 @@
         }
     </div>
 </div> 
-
 <div class="containerP text-center">
   <nav aria-label="Page navigation">
     <ul class="pagination">

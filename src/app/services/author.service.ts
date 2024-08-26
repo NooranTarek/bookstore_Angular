@@ -23,4 +23,11 @@ export class AuthorService {
     const author = { name, email, bio };
     return this._HttpClient.post(`${this.apiUrl}`, author);
   }
+  updateAuthor(id: any,authorData:any): Observable<any> {
+    return this._HttpClient.put(`${this.apiUrl}/${id}`, authorData);
+  }
+
+  deleteAuthor(id: any): Observable<any> {
+    return this._HttpClient.delete(`${this.apiUrl}/${id}`);
+  }
 }

@@ -22,7 +22,7 @@ export class BookDetailsComponent {
         this.book = data;
       },
       error: (err) => {
-        console.error('Error fetching product details', err);
+        console.error('Error fetching book details', err);
       }
     });
   }

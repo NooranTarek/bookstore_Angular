@@ -5,6 +5,7 @@ import { AuthorService } from '../services/author.service';
 import { NgFor } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-authors',
@@ -63,14 +64,16 @@ export class AuthorsComponent {
           this.loadAuthors(); 
           this.authorForm.reset(); 
           this.showAddForm = false;
-          this.toastr.success('Author Addedd successfully.');
-
+          this.toastr.success('Author added successfully.');
         },
-        (error) => {
-          console.error('Error adding author', error);
+        (error: HttpErrorResponse) => {
+          console.log("error----->", error.error.message);
+         const errorMessage = error.error.message;
+         this.toastr.error(errorMessage);
         }
       );
     }
   }
+  
 
 }

@@ -1,11 +1,75 @@
 <div class="container">
     <div class="book-card">
-        @if(author) {
-            <div class="badge"><h1>{{author.name}}</h1></div>
-            <div class="book-details">
-                <span class="book-author">{{ author.email }}</span>
-                <p>{{ author.bio }}</p>
-            </div>
-        }
+      @if(author) {
+        <div class="header">
+          <div class="author-name">
+            <h1>{{author.name}}</h1>
+          </div>
+          <div class="buttons">
+            <button class="btn btn-primary btn-sm rounded-0" type="button" (click)="showEditForm = true" title="Edit">
+                <i class="fa fa-edit"></i>
+              </button>
+              
+              <button class="btn btn-danger btn-sm rounded-0" type="button" (click)="deleteAuthor()" title="Delete">
+                <i class="fa fa-trash"></i>
+              </button>
+          </div>
+        </div>
+        <div class="book-details">
+          <span class="book-author">{{ author.email }}</span>
+          <p>{{ author.bio }}</p>
+        </div>
+      }
     </div>
-</div>
+    @if(showEditForm){
+        <div class="popup-form">
+            <div class="popup-content">
+                <form [formGroup]="authorForm" (ngSubmit)="updateAuthor()">
+                    <div class="form-group">
+                      <label for="name" class="text-light">Name:</label>
+                      <input id="name" class="form-control" formControlName="name" type="text">
+                      @if(authorForm.controls['name'].invalid && authorForm.controls['name'].touched) {
+                        <div id="categoryHelp" class="form-text text-danger">
+                          @if(authorForm.controls['name'].errors?.['required']) {
+                            <small>name is required</small>
+                          }
+                        </div>
+                      }
+                    </div>
+                    <div class="form-group">
+                      <label for="email" class="text-light">Email:</label>
+                      <input id="email" class="form-control" formControlName="email" type="email">
+                      @if(authorForm.controls['email'].invalid && authorForm.controls['email'].touched) {
+                        <div id="categoryHelp" class="form-text text-danger">
+                          @if(authorForm.controls['email'].errors?.['required']) {
+                            <small>email is required</small>
+                          }
+                        </div>
+                      }
+                    </div>
+                    <div class="form-group">
+                      <label for="bio" class="text-light">Bio:</label>
+                      <textarea id="bio" class="form-control" formControlName="bio"></textarea>
+                      @if(authorForm.controls['bio'].invalid && authorForm.controls['bio'].touched) {
+                        <div id="categoryHelp" class="form-text text-danger">
+                          @if(authorForm.controls['bio'].errors?.['required']) {
+                            <small>bio is required</small>
+                          }
+                          @if(authorForm.controls['bio'].errors?.['minLength']) {
+                            <small>Title must be from 3 to 30 characters</small>
+                          }
+                          @if(authorForm.controls['bio'].errors?.['maxLength']) {
+                            <small>Title must be from 3 to 30 characters</small>
+                          }
+                        </div>
+                      }
+                    </div>
+                    <button type="submit" class="btn btn-success mt-3">Edit Author</button>
+                    <button type="button" class="btn btn-danger mt-3" (click)="cancelEdit()">Cancel</button>
+                  </form>
+                  
+            </div>
+          </div>
+}
+  </div>
+  
