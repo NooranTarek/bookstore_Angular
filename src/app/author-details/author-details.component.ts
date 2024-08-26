@@ -18,7 +18,7 @@ export class AuthorDetailsComponent {
   authorForm:FormGroup;
   showEditForm: boolean = false;
   @Input() authorData  !: Author;
-
+  booksOfAuthor:any;
   constructor(
     private toastr: ToastrService,
     private fb: FormBuilder,
@@ -34,6 +34,7 @@ export class AuthorDetailsComponent {
   }
   ngOnInit():void{
     this.showAuthorDetauls();
+    this.authorBooks();
   }
   showAuthorDetauls():void{
     const id =this.route.snapshot.paramMap.get('_id');
@@ -99,5 +100,19 @@ export class AuthorDetailsComponent {
       });
     }
   }
-  
+authorBooks ():void{
+  const id =this.route.snapshot.paramMap.get('_id');
+  this.authorService.authorBooks(id).subscribe({
+    next: (data: any) => {
+      console.log("author  books -->",data);
+      this.booksOfAuthor = data;
+    },
+    error: (err) => {
+      console.error('Error fetching author details', err);
+    }
+  });
+}
+viewBookDetails(bookId: any): void {
+  this.router.navigate(['/book-details', bookId]);
+}
 }

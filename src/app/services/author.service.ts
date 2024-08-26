@@ -30,4 +30,7 @@ export class AuthorService {
   deleteAuthor(id: any): Observable<any> {
     return this._HttpClient.delete(`${this.apiUrl}/${id}`);
   }
+  authorBooks(id:any):Observable<any>{
+    return this._HttpClient.get(`http://localhost:3000/books/author/${id}`)
+  }
 }
