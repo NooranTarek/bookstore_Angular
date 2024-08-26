@@ -19,6 +19,7 @@ export class AuthorDetailsComponent {
   authorForm:FormGroup;
   bookForm:FormGroup;
   showEditForm: boolean = false;
+  showEditBookForm: boolean = false;
   @Input() authorData  !: Author;
   booksOfAuthor:any;
   showAddForm: boolean = false;
@@ -82,6 +83,7 @@ export class AuthorDetailsComponent {
 
   cancelEdit(): void {
     this.showEditForm = false;
+    this.showEditBookForm=false;
   }
 
   deleteAuthor(): void {
@@ -146,6 +148,51 @@ addBook(): void {
         this.toastr.error(error.error.message);
       }
     );
+  }
+}
+deleteBook(bookId: string): void {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'You will not be able to recover this Book!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.bookService.deleteBook(bookId).subscribe({
+        next: (res) => {
+          this.toastr.success('Book deleted successfully.');
+          this.authorBooks(); 
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error('Error deleting book', err);
+          this.toastr.error('Failed to delete book.');
+        }
+      });
+    }
+  });
+}
+updateBook(bookId: any): void {
+  if (this.bookForm.valid) {
+    const updatedBook= this.bookForm.value;
+    this.bookService.updateBook(bookId, updatedBook).subscribe({
+      next: (res) => {
+        console.log("this author",res);
+        this.author = res;
+        
+        // this.bookForm.patchValue(res);
+        this.toastr.success('Book updated successfully.');
+        this.showEditBookForm = false;
+        this.showAuthorDetauls();
+
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Error updating book', err);
+        this.toastr.error(err.error.message);
+      }
+    });
   }
 }
 }

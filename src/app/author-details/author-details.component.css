@@ -114,9 +114,9 @@
 }
 .booksContainer{
     margin-top: -260px;
-    margin-left:-140px;
+    margin-left:-100px;
     padding-bottom: 10px;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     overflow: hidden;
@@ -130,3 +130,17 @@
     border: 1px solid #dee2e6; 
     border-radius: 0.25rem; 
 }
+
+.custom-card {
+    width: 30%; /* Adjust width to less than 50% for spacing */
+    margin: 0 2.5%; /* Center the cards with equal margins */
+    margin-bottom: 20px; /* Space between rows */
+  }
+  
+  @media (max-width: 768px) {
+    .custom-card {
+      width: 100%; /* Make it full width on smaller screens */
+      margin: 10px 0;
+    }
+  }
+  
