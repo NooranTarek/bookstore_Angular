@@ -2,7 +2,7 @@ app-book-bar {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 60%;
   z-index: 10; 
 }
 .card-img-actions {
