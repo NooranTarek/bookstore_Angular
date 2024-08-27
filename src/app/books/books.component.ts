@@ -41,7 +41,7 @@ export class BooksComponent {
   }
   loadAuthors(page: number=this.currentPage , limit: number=10 ): void{
     this.bookService.getAuthors(page,limit).subscribe((response:any)=>{
-      console.log("from author",response);
+      // console.log("from author",response);
       this.authors = response.authors.filter((author: any) => author.books && author.books.length > 0);
       this.totalAuthors = response.totalAuthors; 
       this.totalPages = response.totalPages; 
@@ -65,7 +65,7 @@ export class BooksComponent {
     if (this.searchQuery.length > 0) {
       this.bookService.searchBooks(this.searchQuery).subscribe({
         next: (data: any) => {
-          console.log(data);
+          // console.log(data);
           
           this.books = data;
         },

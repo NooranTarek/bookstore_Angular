@@ -10,6 +10,7 @@ import { BookService } from '../services/book.service';
 import { NgIf } from '@angular/common';
 import { faFileImage } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Book } from '../interfaces/book';
 
 @Component({
   selector: 'app-author-details',
@@ -20,6 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 })
 export class AuthorDetailsComponent {
   author:Author|undefined;
+  book:Book|undefined;
   authorForm:FormGroup;
   bookForm:FormGroup;
   showEditForm: boolean = false;
@@ -57,7 +59,7 @@ export class AuthorDetailsComponent {
     const id =this.route.snapshot.paramMap.get('_id');
     this.authorService.authorDetails(id).subscribe({
       next: (data: any) => {
-        console.log(data);
+        // console.log(data);
         this.author = data;
         this.authorForm.patchValue(data);
 
@@ -92,7 +94,8 @@ export class AuthorDetailsComponent {
     this.showEditBookForm=false;
   }
 
-  deleteAuthor(): void {
+
+ deleteAuthor(): void {
     if (this.author) {
       Swal.fire({
         title: 'Are you sure?',
@@ -122,7 +125,7 @@ authorBooks ():void{
   const id =this.route.snapshot.paramMap.get('_id');
   this.authorService.authorBooks(id).subscribe({
     next: (data: any) => {
-      console.log("author  books -->",data);
+      // console.log("author  books -->",data);
       this.booksOfAuthor = data;
 
     },
@@ -136,13 +139,28 @@ viewBookDetails(bookId: any): void {
 }
 
 //______________________book____________________
+bookDetails(id:any):void{
+  // const id =this.route.snapshot.paramMap.get('_id');
+  this.bookService.bookDetails(id).subscribe({
+    next: (data: any) => {
+      // console.log("book data",data);
+      this.book = data;
+      this.bookForm.patchValue(data);
+
+    },
+    error: (err) => {
+      console.error('Error fetching author details', err);
+    }
+  });
+} 
+
 onImagePicked(event: any) {
   const file: File = event.target.files[0];
 
   if (file) {
     if (file.type.startsWith('image/')) { 
       this.selectedImage=file;      
-      console.log(this.selectedImage);
+      // console.log(this.selectedImage);
       
       this.imageInvalid = false;
     } else {
@@ -174,7 +192,7 @@ addBook(): void {
         this.toastr.success('Book added successfully.');
       },
       (error: HttpErrorResponse) => {
-        console.log("error----->", error.error.message);
+        // console.log("error----->", error.error.message);
         this.toastr.error(error.error.message);
       }
     );
@@ -210,8 +228,8 @@ updateBook(bookId: string): void {
     this.bookService.updateBook(bookId, updatedBook).subscribe({
       next: (res) => {
         
-        // this.bookForm.patchValue(res.book);
-        console.log(this.bookForm.patchValue);
+        this.bookForm.patchValue(res.book);
+        // console.log("this.authorBooks",this.authorBooks);
         this.toastr.success('Book updated successfully.');
         this.showEditBookForm = false;
         this.showAuthorDetails();
@@ -223,5 +241,9 @@ updateBook(bookId: string): void {
         this.toastr.error(err.error.message);
       }
     });
+}
+onEditBookClick(id:any){
+  this.bookDetails(id);
+  this.showEditBookForm=true;
 }
 }

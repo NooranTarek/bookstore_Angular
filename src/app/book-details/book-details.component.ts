@@ -17,7 +17,7 @@ export class BookDetailsComponent {
     const id =this.route.snapshot.paramMap.get('_id');
     this.bookService.bookDetails(id).subscribe({
       next: (data: any) => {
-        console.log(data);
+        // console.log(data);
         
         this.book = data;
       },

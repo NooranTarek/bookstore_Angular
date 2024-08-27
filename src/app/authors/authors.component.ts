@@ -33,7 +33,7 @@ export class AuthorsComponent {
   }
   loadAuthors(page: number=this.currentPage , limit: number=this.pageSize ): void{
     this.authorService.getAuthors(page,limit).subscribe((response:any)=>{
-      console.log("from author",response);
+      // console.log("from author",response);
       this.authors = response.authors;
       this.totalAuthors = response.totalAuthors; 
       this.totalPages = response.totalPages; 
@@ -60,14 +60,14 @@ export class AuthorsComponent {
       const { name, email, bio } = this.authorForm.value;
       this.authorService.addAuthor(name, email, bio).subscribe(
         (res) => {
-          console.log(res);
+          // console.log(res);
           this.loadAuthors(); 
           this.authorForm.reset(); 
           this.showAddForm = false;
           this.toastr.success('Author added successfully.');
         },
         (error: HttpErrorResponse) => {
-          console.log("error----->", error.error.message);
+          // console.log("error----->", error.error.message);
          const errorMessage = error.error.message;
          this.toastr.error(errorMessage);
         }
