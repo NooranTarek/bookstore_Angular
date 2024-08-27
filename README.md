@@ -3,6 +3,8 @@
 ![Angular Badge](https://img.shields.io/badge/Angular-18.x-red?style=flat-square)
 ![Bootstrap Badge](https://img.shields.io/badge/Bootstrap-5.x-blue?style=flat-square)
 ![SweetAlert2 Badge](https://img.shields.io/badge/SweetAlert2-11.x-yellow?style=flat-square)
+![Font Awesome Badge](https://img.shields.io/badge/Font_Awesome-6.x-blue?style=flat-square)
+![Toast Badge](https://img.shields.io/badge/Toast-8.x-green?style=flat-square)
 
 ![Frontend Diagram](book_cove.png)
 
