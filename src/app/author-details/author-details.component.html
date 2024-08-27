@@ -90,14 +90,19 @@
             </div>
             <div class="form-group">
               <label for="image" class="text-light">Image:</label>
-              <input id="image" class="form-control" formControlName="image" type="text">
-              @if(bookForm.controls['image'].invalid && bookForm.controls['image'].touched) {
+              <button class="container-btn-file input-container ic1 btn btn-block text-center btn-dark p-0" style="height: 46px">
+                <fa-icon [icon]="fileImage" class="mx-2"></fa-icon>
+                Upload Image
+                <input class="file" name="text" type="file" id="image"  (change)="onImagePicked($event)"/>
+              </button>
+              <div *ngIf="bookForm.controls['image'].invalid && bookForm.controls['image'].touched">
                 <div id="categoryHelp" class="form-text text-danger">
-                  @if(bookForm.controls['image'].errors?.['required']) {
-                    <small>image is required</small>
-                  }
+                  <small *ngIf="bookForm.controls['image'].errors?.['required']">Image is required</small>
                 </div>
-              }
+              </div>
+              <div *ngIf="imageInvalid" class="custom-alert" role="alert">
+                Invalid Image. Please select a valid image file.
+              </div>
             </div>
             <div class="form-group">
               <label for="description" class="text-light">Description:</label>
@@ -167,7 +172,6 @@
         @if(showEditBookForm){
           <div class="popup-form">
               <div class="popup-content">
-                <h4>{{authorBook._id}}</h4>
                 <form [formGroup]="bookForm" (ngSubmit)="updateBook(authorBook._id)">
                   <div class="form-group">
                     <label for="title" class="text-light">Title:</label>
@@ -180,17 +184,23 @@
                       </div>
                     }
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="image" class="text-light">Image:</label>
-                    <input id="image" class="form-control" formControlName="image" type="text">
-                    @if(bookForm.controls['image'].invalid && bookForm.controls['image'].touched) {
+                    <button class="container-btn-file input-container ic1 btn btn-block text-center btn-dark p-0" style="height: 46px">
+                      <fa-icon [icon]="fileImage" class="mx-2"></fa-icon>
+                      Upload Image
+                      <input class="file" name="text" type="file" id="image"  />
+                    </button>
+                    <div *ngIf="bookForm.controls['image'].invalid && bookForm.controls['image'].touched">
                       <div id="categoryHelp" class="form-text text-danger">
-                        @if(bookForm.controls['image'].errors?.['required']) {
-                          <small>image is required</small>
-                        }
+                        <small *ngIf="bookForm.controls['image'].errors?.['required']">Image is required</small>
                       </div>
-                    }
-                  </div>
+                    </div>
+                    <div *ngIf="imageInvalid" class="custom-alert" role="alert">
+                      Invalid Image. Please select a valid image file.
+                    </div>
+                  </div> -->
+                  
                   <div class="form-group">
                     <label for="description" class="text-light">Description:</label>
                     <textarea id="description" class="form-control" formControlName="description"></textarea>
@@ -200,10 +210,10 @@
                           <small>description is required</small>
                         }
                         @if(bookForm.controls['description'].errors?.['minLength']) {
-                          <small>Title must be from 3 to 30 characters</small>
+                          <small>description must be from 3 to 30 characters</small>
                         }
                         @if(bookForm.controls['description'].errors?.['maxLength']) {
-                          <small>Title must be from 3 to 30 characters</small>
+                          <small>description must be from 3 to 30 characters</small>
                         }
                       </div>
                     }

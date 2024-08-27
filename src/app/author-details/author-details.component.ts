@@ -7,10 +7,14 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { BookService } from '../services/book.service';
+import { NgIf } from '@angular/common';
+import { faFileImage } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 @Component({
   selector: 'app-author-details',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,NgIf,FontAwesomeModule],
   templateUrl: './author-details.component.html',
   styleUrl: './author-details.component.css'
 })
@@ -23,7 +27,9 @@ export class AuthorDetailsComponent {
   @Input() authorData  !: Author;
   booksOfAuthor:any;
   showAddForm: boolean = false;
-
+  imageInvalid: boolean = false;
+  selectedImage: File | null = null;
+  fileImage = faFileImage;
   constructor(
     private toastr: ToastrService,
     private fb: FormBuilder,
@@ -44,10 +50,10 @@ export class AuthorDetailsComponent {
     });
   }
   ngOnInit():void{
-    this.showAuthorDetauls();
+    this.showAuthorDetails();
     this.authorBooks();
   }
-  showAuthorDetauls():void{
+  showAuthorDetails():void{
     const id =this.route.snapshot.paramMap.get('_id');
     this.authorService.authorDetails(id).subscribe({
       next: (data: any) => {
@@ -70,7 +76,7 @@ export class AuthorDetailsComponent {
           this.authorForm.patchValue(res);
           this.toastr.success('Author updated successfully.');
           this.showEditForm = false;
-          this.showAuthorDetauls();
+          this.showAuthorDetails();
 
         },
         error: (err: HttpErrorResponse) => {
@@ -118,6 +124,7 @@ authorBooks ():void{
     next: (data: any) => {
       console.log("author  books -->",data);
       this.booksOfAuthor = data;
+
     },
     error: (err) => {
       console.error('Error fetching author details', err);
@@ -129,19 +136,42 @@ viewBookDetails(bookId: any): void {
 }
 
 //______________________book____________________
+onImagePicked(event: any) {
+  const file: File = event.target.files[0];
+
+  if (file) {
+    if (file.type.startsWith('image/')) { 
+      this.selectedImage=file;      
+      console.log(this.selectedImage);
+      
+      this.imageInvalid = false;
+    } else {
+      this.imageInvalid = true;
+      this.bookForm.patchValue({ image: null });
+      (event.target as HTMLInputElement).value = '';
+    }
+}
+}
+
 addBook(): void {
-  if (this.bookForm.valid && this.author) {
-    const { title, description, image } = this.bookForm.value;
-    const authorId = this.author._id; 
-    this.bookService.addBook(title, description, image, authorId).subscribe(
+  if (this.author) {
+    const authorId = this.author._id;
+    const formData = new FormData();
+    const title = this.bookForm.get('title')?.value ?? '';
+    const description = this.bookForm.get('description')?.value ?? '';
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('authorId', authorId);
+    if (this.selectedImage) {
+      formData.append('image', this.selectedImage, this.selectedImage.name);
+    }
+
+    this.bookService.addBook(formData).subscribe(
       (res) => {
-        console.log(res);
-        console.log('Image URL:', image);
         this.authorBooks();
-        this.bookForm.reset(); 
+        this.bookForm.reset();
         this.showAddForm = false;
         this.toastr.success('Book added successfully.');
-
       },
       (error: HttpErrorResponse) => {
         console.log("error----->", error.error.message);
@@ -150,6 +180,7 @@ addBook(): void {
     );
   }
 }
+
 deleteBook(bookId: string): void {
   Swal.fire({
     title: 'Are you sure?',
@@ -174,18 +205,17 @@ deleteBook(bookId: string): void {
     }
   });
 }
-updateBook(bookId: any): void {
-  if (this.bookForm.valid) {
+updateBook(bookId: string): void {
     const updatedBook= this.bookForm.value;
     this.bookService.updateBook(bookId, updatedBook).subscribe({
       next: (res) => {
-        console.log("this author",res);
-        this.author = res;
         
-        // this.bookForm.patchValue(res);
+        // this.bookForm.patchValue(res.book);
+        console.log(this.bookForm.patchValue);
         this.toastr.success('Book updated successfully.');
         this.showEditBookForm = false;
-        this.showAuthorDetauls();
+        this.showAuthorDetails();
+        this.authorBooks(); 
 
       },
       error: (err: HttpErrorResponse) => {
@@ -193,6 +223,5 @@ updateBook(bookId: any): void {
         this.toastr.error(err.error.message);
       }
     });
-  }
 }
 }

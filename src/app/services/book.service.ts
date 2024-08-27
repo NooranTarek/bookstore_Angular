@@ -32,10 +32,10 @@ export class BookService {
   bookDetails(id: any): Observable<Book[]> {
     return this._HttpClient.get<Book[]>(`${this.apiUrl}/${id}`);
   }
-  addBook(title: string, description: string, image: string,authorId:any): Observable<any> {
-    const book = { title, description, image ,authorId};
-    return this._HttpClient.post(`${this.apiUrl}`, book);
+  addBook(formData: FormData): Observable<any> {
+    return this._HttpClient.post(`${this.apiUrl}`, formData);
   }
+  
   updateBook(id: any,bookData:any): Observable<any> {
     return this._HttpClient.put(`${this.apiUrl}/${id}`, bookData);
   }
