@@ -11,11 +11,12 @@ import { NgIf } from '@angular/common';
 import { faFileImage } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Book } from '../interfaces/book';
+import { BookBarComponent } from '../book-bar/book-bar.component';
 
 @Component({
   selector: 'app-author-details',
   standalone: true,
-  imports: [ReactiveFormsModule,NgIf,FontAwesomeModule],
+  imports: [ReactiveFormsModule,NgIf,FontAwesomeModule,BookBarComponent],
   templateUrl: './author-details.component.html',
   styleUrl: './author-details.component.css'
 })

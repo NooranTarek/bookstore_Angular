@@ -1,0 +1,33 @@
+#bookBar {
+    position: relative;
+    display: inline-block; 
+  }
+.bookImage{
+    /* margin-left: 1100px; */
+    width: 175px;
+    height: 120px;
+    display: block;
+    }
+      .link {
+        position: absolute;
+        top: 50%; 
+        left:50%; 
+        color: white; 
+        text-decoration: none;
+        font-weight: bold; 
+        color: rgb(34,19,12);
+      }
+      
+      .link:nth-child(2) {
+        top: 35%; 
+        left: 18%;
+        background-color:rgb(223,104,0);
+      }
+      
+      .link:nth-child(3) {
+        top: 35%; 
+        left: 51.5%;
+        background-color: rgb(240,153,0);
+
+      }
+      

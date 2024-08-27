@@ -5,11 +5,12 @@ import { BookService } from '../services/book.service';
 import { NgFor } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Author } from '../interfaces/author';
+import { BookBarComponent } from '../book-bar/book-bar.component';
 
 @Component({
   selector: 'app-books',
   standalone: true,
-  imports: [RouterLink,RouterLinkActive,NgFor],
+  imports: [RouterLink,RouterLinkActive,NgFor,  BookBarComponent  ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.css'
 })

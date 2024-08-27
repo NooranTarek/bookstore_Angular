@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { BookService } from '../services/book.service';
 import { Book } from '../interfaces/book';
+import { BookBarComponent } from '../book-bar/book-bar.component';
 
 @Component({
   selector: 'app-book-details',
   standalone: true,
-  imports: [RouterLink,RouterLinkActive],
+  imports: [RouterLink,RouterLinkActive,  BookBarComponent],
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.css'
 })

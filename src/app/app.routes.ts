@@ -4,6 +4,7 @@ import { BooksComponent } from './books/books.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { AuthorDetailsComponent } from './author-details/author-details.component';
+import { BookBarComponent } from './book-bar/book-bar.component';
 
 export const routes: Routes = [
     {
@@ -25,5 +26,9 @@ export const routes: Routes = [
       {
         path: 'author-details/:_id',
         component: AuthorDetailsComponent,
+      },
+      {
+        path: 'book-bar',
+        component: BookBarComponent,
       }
 ];

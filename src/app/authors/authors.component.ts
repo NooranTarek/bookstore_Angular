@@ -6,11 +6,12 @@ import { NgFor } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BookBarComponent } from '../book-bar/book-bar.component';
 
 @Component({
   selector: 'app-authors',
   standalone: true,
-  imports: [NgFor,ReactiveFormsModule],
+  imports: [NgFor,ReactiveFormsModule,BookBarComponent],
   templateUrl: './authors.component.html',
   styleUrl: './authors.component.css'
 })

@@ -1,7 +1,11 @@
-    /* .bg-blur {
-        filter: blur(2px); 
-    } */
-    .text-outline {
+app-book-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10; 
+}
+.text-outline {
         text-shadow: 
             -1px -1px 0 #533f00,  
              1px -1px 0 #533f00,
