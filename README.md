@@ -1,27 +1,50 @@
-# BookStore
+# The Book Cove - Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.5.
+![Angular Badge](https://img.shields.io/badge/Angular-18.x-red?style=flat-square)
+![Bootstrap Badge](https://img.shields.io/badge/Bootstrap-5.x-blue?style=flat-square)
+![SweetAlert2 Badge](https://img.shields.io/badge/SweetAlert2-11.x-yellow?style=flat-square)
 
-## Development server
+![Backend Diagram](book_cove.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 📄 Project Description
 
-## Code scaffolding
+This Angular frontend provides a user interface for "The Book Cove" application, including pages for home, books, book details, authors, and author details, along with CRUD functionality.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## ✨ Features
 
-## Build
+- Home page with introduction and navigation.
+- Books page displaying a list of books.
+- Book details page with detailed information.
+- Authors page with a list of authors and CRUD operations.
+- Author details page with detailed author info and CRUD operations.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## ⚙️ Installation Instructions
 
-## Running unit tests
+1. **Clone the Repository:**
+    ```bash
+    git clone https://github.com/your-repo/frontend.git
+    ```
+2. **Navigate to the Frontend Directory:**
+    ```bash
+    cd frontend
+    ```
+3. **Install Dependencies:**
+    ```bash
+    npm install
+    ```
+4. **Start the Application:**
+    ```bash
+    ng serve -o
+    ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 📄 Pages
 
-## Running end-to-end tests
+- **Home Page:** Introduction and navigation.
+- **Books Page:** List of books with CRUD operations.
+- **Book Details Page:** Detailed view of a selected book.
+- **Authors Page:** List of authors with CRUD operations.
+- **Author Details Page:** Detailed view of a selected author.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Made with ❤️ by [Nooran Tarek](https://github.com/NooranTarek)
