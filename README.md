@@ -4,7 +4,7 @@
 ![Bootstrap Badge](https://img.shields.io/badge/Bootstrap-5.x-blue?style=flat-square)
 ![SweetAlert2 Badge](https://img.shields.io/badge/SweetAlert2-11.x-yellow?style=flat-square)
 
-![Backend Diagram](book_cove.png)
+![Frontend Diagram](book_cove.png)
 
 ## 📄 Project Description
 
