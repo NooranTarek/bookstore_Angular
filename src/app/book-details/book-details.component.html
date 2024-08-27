@@ -7,7 +7,9 @@
                 <img [src]="book.image" alt="{{ book.title }}">
             </div>
             <div class="book-details">
-                <span class="book-author">{{ book.author.name }}</span>
+                <a style="text-decoration: none;" [routerLink]="['/author-details', book.author._id]">
+                    <span class="book-author">{{ book.author.name }}</span>
+                </a>
                 <p>{{ book.description }}</p>
             </div>
         }
