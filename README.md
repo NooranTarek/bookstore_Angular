@@ -22,11 +22,11 @@ This Angular frontend provides a user interface for "The Book Cove" application,
 
 1. **Clone the Repository:**
     ```bash
-    git clone https://github.com/your-repo/frontend.git
+    git clone git@github.com:NooranTarek/bookstore_Angular.git
     ```
 2. **Navigate to the Frontend Directory:**
     ```bash
-    cd frontend
+    cd bookstore_Angular
     ```
 3. **Install Dependencies:**
     ```bash
