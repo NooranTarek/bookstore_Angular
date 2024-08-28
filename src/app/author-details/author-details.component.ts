@@ -188,6 +188,7 @@ addBook(): void {
 
     this.bookService.addBook(formData).subscribe(
       (res) => {
+        this.bookForm.reset();
         this.authorBooks();
         this.bookForm.reset();
         this.showAddForm = false;
@@ -225,25 +226,32 @@ deleteBook(bookId: string): void {
     }
   });
 }
-updateBook(bookId:string): void {
-    const updatedBook= this.bookForm.value;
-    this.bookService.updateBook(bookId, updatedBook).subscribe({
-      next: (res) => {
-        
-        this.bookForm.patchValue(res.book);
-        // console.log("this.authorBooks",this.authorBooks);
-        this.toastr.success('Book updated successfully.');
-        this.showEditBookForm = false;
-        this.showAuthorDetails();
-        this.authorBooks(); 
+updateBook(bookId: string): void {
+  const updatedBook = new FormData();
+  const title = this.bookForm.get('title')?.value ?? '';
+  const description = this.bookForm.get('description')?.value ?? '';  
+  updatedBook.append('title', title);
+  updatedBook.append('description', description);
 
-      },
-      error: (err: HttpErrorResponse) => {
-        console.error('Error updating book', err);
-        this.toastr.error(err.error.message);
-      }
-    });
+  if (this.selectedImage) {
+    updatedBook.append('image', this.selectedImage, this.selectedImage.name);
+  }
+
+  this.bookService.updateBook(bookId, updatedBook).subscribe({
+    next: (res) => {
+      this.bookForm.patchValue(res.book);
+      this.toastr.success('Book updated successfully.');
+      this.showEditBookForm = false;
+      this.showAuthorDetails();
+      this.authorBooks();
+    },
+    error: (err: HttpErrorResponse) => {
+      console.error('Error updating book', err);
+      this.toastr.error(err.error.message);
+    }
+  });
 }
+
 onEditBookClick(id:any){
   this.bookDetails(id);
   this.book_Id=id;

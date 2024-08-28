@@ -185,12 +185,12 @@
                       </div>
                     }
                   </div>
-                  <!-- <div class="form-group">
+                  <div class="form-group">
                     <label for="image" class="text-light">Image:</label>
                     <button class="container-btn-file input-container ic1 btn btn-block text-center btn-dark p-0" style="height: 46px">
                       <fa-icon [icon]="fileImage" class="mx-2"></fa-icon>
                       Upload Image
-                      <input class="file" name="text" type="file" id="image"  />
+                      <input class="file" name="text" type="file" id="image"  (change)="onImagePicked($event)"/>
                     </button>
                     <div *ngIf="bookForm.controls['image'].invalid && bookForm.controls['image'].touched">
                       <div id="categoryHelp" class="form-text text-danger">
@@ -200,7 +200,7 @@
                     <div *ngIf="imageInvalid" class="custom-alert" role="alert">
                       Invalid Image. Please select a valid image file.
                     </div>
-                  </div> -->
+                  </div>
                   
                   <div class="form-group">
                     <label for="description" class="text-light">Description:</label>
