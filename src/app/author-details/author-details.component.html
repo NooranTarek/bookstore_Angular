@@ -173,7 +173,7 @@
         @if(showEditBookForm){
           <div class="popup-form">
               <div class="popup-content">
-                <form [formGroup]="bookForm" (ngSubmit)="updateBook(authorBook._id)">
+                <form [formGroup]="bookForm" (ngSubmit)="updateBook(this.book_Id)">
                   <div class="form-group">
                     <label for="title" class="text-light">Title:</label>
                     <input id="title" class="form-control" formControlName="title" type="text">

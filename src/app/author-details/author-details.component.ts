@@ -33,6 +33,7 @@ export class AuthorDetailsComponent {
   imageInvalid: boolean = false;
   selectedImage: File | null = null;
   fileImage = faFileImage;
+  book_Id:any;
   constructor(
     private toastr: ToastrService,
     private fb: FormBuilder,
@@ -224,7 +225,7 @@ deleteBook(bookId: string): void {
     }
   });
 }
-updateBook(bookId: string): void {
+updateBook(bookId:string): void {
     const updatedBook= this.bookForm.value;
     this.bookService.updateBook(bookId, updatedBook).subscribe({
       next: (res) => {
@@ -245,6 +246,7 @@ updateBook(bookId: string): void {
 }
 onEditBookClick(id:any){
   this.bookDetails(id);
+  this.book_Id=id;
   this.showEditBookForm=true;
 }
 }
